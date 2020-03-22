@@ -1,0 +1,19 @@
+name: Test exiting 0
+on: [push]
+
+jobs:
+
+  test_exit_0:
+
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Try to fail
+        run: exit 0
+      - name: Print message if we don't exit
+        run: echo Should not get here but should still pass
